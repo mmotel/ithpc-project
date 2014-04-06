@@ -72,7 +72,23 @@ int main(int argc, char **argv){
   if(printM == 0){
     printMatrix(n, R);
   }
+
+  //free allocated memmory
+  for(i=0; i<n; i++){
+    free(S[i]);
+  }
+
+  free(S);
+
+  for(i=0; i<n; i++){
+    free(T[i]);
+  }  
+
+  free(T);
+
   clock_gettime(CLOCK_MONOTONIC, &end);
+
+  //print times
   printf("Time : %.16f\n", timeDiff(&end, &start));
   printf("Read : %.16f\n", timeDiff(&e_input, &s_input));
   printf("Steps: %.16f\n", timeDiff(&e_steps, &s_steps));
