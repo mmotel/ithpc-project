@@ -83,6 +83,26 @@ void printMatrix(int n, int **M){
   printf("\n");
 }
 
+void scanMatrix(int n, char *fname, int **M){
+  int i,j;
+  FILE *inputfile = fopen(fname, "r");
+
+  if(inputfile == NULL){
+    printf("Nie można otworzyć pliku\n");
+    exit(1);
+  }
+
+  for(i = 0; i < n; i++){
+    for(j = 0; j < n; j++){
+      // printf("[%d,%d] ", i,j);
+      fscanf(inputfile, "%d", &M[i][j]);
+    }  
+    // printf("\n");
+  }
+
+  fclose(inputfile);
+}
+
 //use: a.out #size #steps inFile 
 int main(int argc, char **argv){
   // printf(" \033[2J\033[H");
@@ -114,22 +134,23 @@ int main(int argc, char **argv){
   int **R = S;
 
   //read input state matrix
-  FILE *inputfile = fopen(argv[3], "r");
+  // FILE *inputfile = fopen(argv[3], "r");
 
-  if(inputfile == NULL){
-    printf("Nie można otworzyć pliku\n");
-    return -1;
-  }
+  // if(inputfile == NULL){
+  //   printf("Nie można otworzyć pliku\n");
+  //   return -1;
+  // }
 
-  for(i = 0; i < n; i++){
-    for(j = 0; j < n; j++){
-      // printf("[%d,%d] ", i,j);
-      fscanf(inputfile, "%d", &S[i][j]);
-    }  
-    // printf("\n");
-  }
+  // for(i = 0; i < n; i++){
+  //   for(j = 0; j < n; j++){
+  //     // printf("[%d,%d] ", i,j);
+  //     fscanf(inputfile, "%d", &S[i][j]);
+  //   }  
+  //   // printf("\n");
+  // }
 
-  fclose(inputfile);
+  // fclose(inputfile);
+  scanMatrix(n, argv[3], S);
   //---
 
   //print input state matrix
