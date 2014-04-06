@@ -20,14 +20,14 @@ int main(int argc, char **argv){
     return -1;
   }
 
-  struct timespec start, end;
+  struct timespec s_input, e_input, start, end, s_steps, e_steps;
 
   int n = atoi( argv[1] );
   int steps = atoi( argv[2] );
   int printM = atoi( argv[4] );
 
   int i;
-
+  clock_gettime(CLOCK_MONOTONIC, &start);
   //allocating matrixes
   int **S = (int**) malloc( n * sizeof(int*));
 
@@ -47,10 +47,10 @@ int main(int argc, char **argv){
   if(printM == 1){
     printf(" \033[2J\033[H");
   }
-
+  clock_gettime(CLOCK_MONOTONIC, &s_input);
   //read input state matrix
   scanMatrix(n, argv[3], S);
-
+  clock_gettime(CLOCK_MONOTONIC, &e_input);
   //print input state matrix
   if(printM == 1){
     printMatrixAnimation(n, S);
@@ -62,18 +62,20 @@ int main(int argc, char **argv){
   if(printM == 1){
     printf(" \033[2J\033[H");
   }
-  clock_gettime(CLOCK_MONOTONIC, &start);
+  clock_gettime(CLOCK_MONOTONIC, &s_steps);
   //simulating steps
   simulateSteps(n, steps, S, T, R, printM);
-  clock_gettime(CLOCK_MONOTONIC, &end);
+  clock_gettime(CLOCK_MONOTONIC, &e_steps);
 // printf(" \033[2J\033[H");
 
   //print result state matrix
   if(printM == 0){
     printMatrix(n, R);
   }
-
-  printf("Time: %.16f\n", timeDiff(&end, &start));
+  clock_gettime(CLOCK_MONOTONIC, &end);
+  printf("Time : %.16f\n", timeDiff(&end, &start));
+  printf("Read : %.16f\n", timeDiff(&e_input, &s_input));
+  printf("Steps: %.16f\n", timeDiff(&e_steps, &s_steps));
 
   return 0;
 }
