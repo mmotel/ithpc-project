@@ -50,6 +50,17 @@ void makeMove(int n, int **S, int **T){
   }
 }
 
+void printMatrix(int n, int **M){
+  int i,j;
+  for(i = 0; i < n; i++){
+    for(j = 0; j < n; j++){
+      printf("%d ", M[i][j]);
+    }  
+    printf("\n");
+  }
+  printf("\n");
+}
+
 //use: a.out #size #steps inFile 
 int main(int argc, char **argv){
   // printf(" \033[2J\033[H");
@@ -64,6 +75,8 @@ int main(int argc, char **argv){
 
   int i,j;
 
+  int **R;
+
   //allocating matrixes
   int **S = (int**) malloc( n * sizeof(int*));
 
@@ -76,6 +89,7 @@ int main(int argc, char **argv){
   for(i=0; i<n; i++){
     T[i] = (int*) malloc(n * sizeof(int));
   }
+  //---
 
   //read input state matrix
   FILE *inputfile = fopen(argv[3], "r");
@@ -94,27 +108,32 @@ int main(int argc, char **argv){
   }
 
   fclose(inputfile);
+  //---
 
   //print input state matrix
-  for(i = 0; i < n; i++){
-    for(j = 0; j < n; j++){
-      printf("%d ", S[i][j]);
-    }  
-    printf("\n");
+  printMatrix(n, S);
+
+  for(i=0; i < steps; i++){
+    if(i%2==0){
+      makeMove(n, S, T);
+      printMatrix(n, T);
+    }
+    else{
+      makeMove(n, T, S);
+      printMatrix(n, S);
+    }
   }
 
-
-  makeMove(n, S, T);
+  if(steps%2==0){
+    R = S;
+  }
+  else{
+    R = T;
+  }
 // printf(" \033[2J\033[H");
-  printf("\n");
 
   //print result state matrix
-  for(i = 0; i < n; i++){
-    for(j = 0; j < n; j++){
-      printf("%d ", T[i][j]);
-    }  
-    printf("\n");
-  }
+  printMatrix(n, R);
 
 
   return 0;
