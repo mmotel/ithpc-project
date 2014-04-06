@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+
+#include "matrixhelpers.h"
 
 int checkCell(int x, int y, int size, int **S){
   int i,j;
@@ -50,17 +53,25 @@ void makeMove(int n, int **S, int **T){
   }
 }
 
-void simulateSteps(int n, int steps, int **S, int **T, int **R){
+void simulateSteps(int n, int steps, int **S, int **T, int **R, int printM){
   int i;
 
   for(i=0; i < steps; i++){
     if(i%2==0){
       makeMove(n, S, T);
-      // printMatrix(n, T);
+      if(printM == 1){
+        printf(" \033[2J\033[H");
+        printMatrixAnimation(n, T);
+        sleep(1);
+      }
     }
     else{
       makeMove(n, T, S);
-      // printMatrix(n, S);
+      if(printM == 1){
+        printf(" \033[2J\033[H");
+        printMatrixAnimation(n, S);
+        sleep(1);
+      }
     }
   }
 

@@ -12,6 +12,23 @@ void printMatrix(int n, int **M){
   printf("\n");
 }
 
+void printMatrixAnimation(int n, int **M){
+  int i,j;
+  for(i = 0; i < n; i++){
+    for(j = 0; j < n; j++){
+      if(M[i][j] == 1){
+        printf("# ");
+      }
+      else{
+        printf("- ");
+      }
+      // printf("%d ", M[i][j]);
+    }  
+    printf("\n");
+  }
+  printf("\n");
+}
+
 void scanMatrix(int n, char *fname, int **M){
   int i,j;
   FILE *inputfile = fopen(fname, "r");
