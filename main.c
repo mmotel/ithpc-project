@@ -50,6 +50,28 @@ void makeMove(int n, int **S, int **T){
   }
 }
 
+void simulateSteps(int n, int steps, int **S, int **T, int **R){
+  int i;
+
+  for(i=0; i < steps; i++){
+    if(i%2==0){
+      makeMove(n, S, T);
+      // printMatrix(n, T);
+    }
+    else{
+      makeMove(n, T, S);
+      // printMatrix(n, S);
+    }
+  }
+
+  if(steps%2==0){
+    R = S;
+  }
+  else{
+    R = T;
+  } 
+}
+
 void printMatrix(int n, int **M){
   int i,j;
   for(i = 0; i < n; i++){
@@ -75,8 +97,6 @@ int main(int argc, char **argv){
 
   int i,j;
 
-  int **R;
-
   //allocating matrixes
   int **S = (int**) malloc( n * sizeof(int*));
 
@@ -90,6 +110,8 @@ int main(int argc, char **argv){
     T[i] = (int*) malloc(n * sizeof(int));
   }
   //---
+
+  int **R = S;
 
   //read input state matrix
   FILE *inputfile = fopen(argv[3], "r");
@@ -113,23 +135,9 @@ int main(int argc, char **argv){
   //print input state matrix
   printMatrix(n, S);
 
-  for(i=0; i < steps; i++){
-    if(i%2==0){
-      makeMove(n, S, T);
-      printMatrix(n, T);
-    }
-    else{
-      makeMove(n, T, S);
-      printMatrix(n, S);
-    }
-  }
+  //simulating steps
+  simulateSteps(n, steps, S, T, R);
 
-  if(steps%2==0){
-    R = S;
-  }
-  else{
-    R = T;
-  }
 // printf(" \033[2J\033[H");
 
   //print result state matrix
