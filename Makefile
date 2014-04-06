@@ -3,4 +3,4 @@ all: main.c
 
 test: all
 	clear
-	./a.out
+	./a.out 10 5 matrix.in

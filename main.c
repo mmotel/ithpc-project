@@ -50,11 +50,21 @@ void makeMove(int n, int **S, int **T){
   }
 }
 
+//use: a.out #size #steps inFile 
 int main(int argc, char **argv){
   // printf(" \033[2J\033[H");
-  int n=6;
+
+  if(argc < 3){
+    printf("Użycie: a.out #size #steps startMatrixFile\n");
+    return -1;
+  }
+
+  int n = atoi( argv[1] );
+  int steps = atoi( argv[2] );
+
   int i,j;
-  
+
+  //allocating matrixes
   int **S = (int**) malloc( n * sizeof(int*));
 
   for(i=0; i<n; i++){
@@ -67,12 +77,25 @@ int main(int argc, char **argv){
     T[i] = (int*) malloc(n * sizeof(int));
   }
 
-  S[0][1] = 1;
-  S[1][2] = 1;
-  S[2][0] = 1;
-  S[2][1] = 1;
-  S[2][2] = 1;
+  //read input state matrix
+  FILE *inputfile = fopen(argv[3], "r");
 
+  if(inputfile == NULL){
+    printf("Nie można otworzyć pliku\n");
+    return -1;
+  }
+
+  for(i = 0; i < n; i++){
+    for(j = 0; j < n; j++){
+      // printf("[%d,%d] ", i,j);
+      fscanf(inputfile, "%d", &S[i][j]);
+    }  
+    // printf("\n");
+  }
+
+  fclose(inputfile);
+
+  //print input state matrix
   for(i = 0; i < n; i++){
     for(j = 0; j < n; j++){
       printf("%d ", S[i][j]);
@@ -80,10 +103,12 @@ int main(int argc, char **argv){
     printf("\n");
   }
 
+
   makeMove(n, S, T);
 // printf(" \033[2J\033[H");
   printf("\n");
 
+  //print result state matrix
   for(i = 0; i < n; i++){
     for(j = 0; j < n; j++){
       printf("%d ", T[i][j]);
