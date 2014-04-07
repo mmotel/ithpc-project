@@ -8,11 +8,15 @@ build: comp main.o lifegame.o matrixhelpers.o
 
 testAnimation: all
 	clear
-	./a.out 10 10 matrix.in 1
+	./a.out 10 10 matrix10.in 1
 
 test: all
 	clear
-	./a.out 10 10 matrix.in 0
+	./a.out 10 10 matrix10.in 0
+
+testAnimation50: all
+	clear
+	./a.out 50 100 matrix50.in 1	
 
 clear:
 	rm -rf *.out *.o
