@@ -12,7 +12,7 @@ testAnimation: all
 
 test: all
 	clear
-	./a.out 10 10 matrix10.in 0
+	./a.out 50 100 matrix50.in 0
 
 testAnimation50: all
 	clear

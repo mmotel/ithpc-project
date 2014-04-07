@@ -60,17 +60,19 @@ void simulateSteps(int n, int steps, int **S, int **T, int **R, int printM){
     if(i%2==0){
       makeMove(n, S, T);
       if(printM == 1){
-        printf(" \033[2J\033[H");
+        //rintf(" \033[2J
+          printf("\033[H");
         printMatrixAnimation(n, T);
-        sleep(1);
+        usleep(20);
       }
     }
     else{
       makeMove(n, T, S);
       if(printM == 1){
-        printf(" \033[2J\033[H");
+        //printf(" \033[2J
+        printf("\033[H");
         printMatrixAnimation(n, S);
-        sleep(1);
+        usleep(20);
       }
     }
   }
