@@ -22,7 +22,6 @@ void printMatrixAnimation(int n, int **M){
       else{
         printf("- ");
       }
-      // printf("%d ", M[i][j]);
     }  
     printf("\n");
   }
@@ -40,10 +39,8 @@ void fscanMatrix(int n, char *fname, int **M){
 
   for(i = 0; i < n; i++){
     for(j = 0; j < n; j++){
-      // printf("[%d,%d] ", i,j);
       fscanf(inputfile, "%d", &M[i][j]);
     }  
-    // printf("\n");
   }
 
   fclose(inputfile);

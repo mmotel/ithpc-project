@@ -51,36 +51,42 @@ int main(int argc, char **argv){
   if(printM == 1){
     printf(" \033[2J\033[H");
   }
+
+  //read input state matrix from inFile  
   clock_gettime(CLOCK_MONOTONIC, &s_input);
-  //read input state matrix from inFile
+
   fscanMatrix(in, inFile, S);
   //print input state matrix
   if(printM == 1){
     printMatrixAnimation(n, S);
+    printf(" \033[2J\033[H");
   }
   else{
     printMatrix(n, S);
   }
+
   clock_gettime(CLOCK_MONOTONIC, &e_input);
-  
-  if(printM == 1){
-    printf(" \033[2J\033[H");
-  }
-  clock_gettime(CLOCK_MONOTONIC, &s_steps);
+
+
   //simulating steps
+  clock_gettime(CLOCK_MONOTONIC, &s_steps);
+
   simulateSteps(n, steps, S, T, R, printM);
+
   clock_gettime(CLOCK_MONOTONIC, &e_steps);
-// printf(" \033[2J\033[H");
 
 
-  clock_gettime(CLOCK_MONOTONIC, &s_output);
   //print result state matrix
+  clock_gettime(CLOCK_MONOTONIC, &s_output);
+
   if(printM == 0){
     printMatrix(n, R);
   }
   //print result state matrix into outFile
   fprintMatrix(n, outFile, R);
+
   clock_gettime(CLOCK_MONOTONIC, &e_output);
+
 
   //free allocated memmory
   for(i=0; i<n; i++){
