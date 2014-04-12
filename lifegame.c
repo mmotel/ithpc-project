@@ -72,7 +72,7 @@ void simulateSteps(int n, int steps, int **S, int **T, int **R, int printM){
         //printf(" \033[2J
         printf("\033[H");
         printMatrixAnimation(n, S);
-        usleep(20);
+        usleep(50);
       }
     }
   }
