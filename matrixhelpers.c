@@ -29,7 +29,7 @@ void printMatrixAnimation(int n, int **M){
   printf("\n");
 }
 
-void scanMatrix(int n, char *fname, int **M){
+void fscanMatrix(int n, char *fname, int **M){
   int i,j;
   FILE *inputfile = fopen(fname, "r");
 
@@ -47,4 +47,18 @@ void scanMatrix(int n, char *fname, int **M){
   }
 
   fclose(inputfile);
+}
+
+void fprintMatrix(int n, char *fname, int **M){
+  int i,j;
+
+  FILE *outputfile = fopen(fname, "a");
+
+  for(i = 0; i < n; i++){
+    for(j = 0; j < n; j++){
+      fprintf(outputfile, "%d ", M[i][j]);
+    }  
+    fprintf(outputfile, "\n");
+  }
+  fprintf(outputfile, "\n");
 }
