@@ -16,7 +16,7 @@ double timeDiff(struct timespec *timeA_p, struct timespec *timeB_p)
 //use: a.out #size #steps inFile outFile (0|1)printAnimation
 int main(int argc, char **argv){
   if(argc < 4){
-    printf("Użycie: a.out #size #steps startMatrixFile (0|1)printAnimation\n");
+    printf("Użycie: a.out #size #inputSize #steps startMatrixFile resultMatrixFile (0|1)printAnimation\n");
     return -1;
   }
 
@@ -24,8 +24,11 @@ int main(int argc, char **argv){
   struct timespec s_steps, e_steps, s_output, e_output;
 
   int n = atoi( argv[1] );
-  int steps = atoi( argv[2] );
-  int printM = atoi( argv[5] );
+  int in = atoi( argv[2] );
+  int steps = atoi( argv[3] );
+  char *inFile = argv[4];
+  char *outFile = argv[5];
+  int printM = atoi( argv[6] );
 
   int i;
   clock_gettime(CLOCK_MONOTONIC, &start);
@@ -50,7 +53,7 @@ int main(int argc, char **argv){
   }
   clock_gettime(CLOCK_MONOTONIC, &s_input);
   //read input state matrix from inFile
-  fscanMatrix(n, argv[3], S);
+  fscanMatrix(in, inFile, S);
   //print input state matrix
   if(printM == 1){
     printMatrixAnimation(n, S);
@@ -76,7 +79,7 @@ int main(int argc, char **argv){
     printMatrix(n, R);
   }
   //print result state matrix into outFile
-  fprintMatrix(n, argv[4], R);
+  fprintMatrix(n, outFile, R);
   clock_gettime(CLOCK_MONOTONIC, &e_output);
 
   //free allocated memmory

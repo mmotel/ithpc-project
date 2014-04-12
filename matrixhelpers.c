@@ -52,7 +52,7 @@ void fscanMatrix(int n, char *fname, int **M){
 void fprintMatrix(int n, char *fname, int **M){
   int i,j;
 
-  FILE *outputfile = fopen(fname, "a");
+  FILE *outputfile = fopen(fname, "w");
 
   for(i = 0; i < n; i++){
     for(j = 0; j < n; j++){
@@ -61,4 +61,6 @@ void fprintMatrix(int n, char *fname, int **M){
     fprintf(outputfile, "\n");
   }
   fprintf(outputfile, "\n");
+
+  fclose(outputfile);
 }
