@@ -9,7 +9,7 @@
 //use: a.out #size #steps inFile outFile (0|1)printAnimation (0|1)quiet
 int main(int argc, char **argv){
   if(argc < 8){
-    printf("Użycie: a.out #size #inputSize #steps startMatrixFile resultMatrixFile (0|1)printAnimation (0|1)quiet\n");
+    printf("Użycie: a.out #size #inputSize #steps startMatrixFile resultMatrixFile (0|1)printAnimation (0|1)printMatrix (0|1)quiet\n");
     return -1;
   }
 
@@ -27,7 +27,8 @@ int main(int argc, char **argv){
   char *inFile = argv[4];
   char *outFile = argv[5];
   int printAnim = atoi( argv[6] );
-  int quiet = atoi( argv[7] );
+  int printMat = atoi( argv[7] );
+  int quiet = atoi( argv[8] );
 
 
   clock_gettime(CLOCK_MONOTONIC, &start);
@@ -84,8 +85,9 @@ int main(int argc, char **argv){
     printMatrix(n, R);
   }
   //print result state matrix into outFile
-  fprintMatrix(n, outFile, R);
-
+  if(printMat == 1){
+    fprintMatrix(n, outFile, R);
+  }
   clock_gettime(CLOCK_MONOTONIC, &e_output);
 
 
