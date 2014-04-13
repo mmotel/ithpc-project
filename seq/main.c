@@ -47,25 +47,23 @@ int main(int argc, char **argv){
 
   R = S;
 
-  if(quiet != 1){
-    if(printAnim == 1){
-      printf(" \033[2J\033[H");
-    }
+  if(quiet != 1 && printAnim == 1){
+    printf(" \033[2J\033[H");
   }
+
+
   //read input state matrix from inFile  
   clock_gettime(CLOCK_MONOTONIC, &s_input);
 
   fscanMatrix(in, inFile, S);
-  //print input state matrix
 
-  if(quiet != 1){
-    if(printAnim == 1){
-      printMatrixAnimation(n, S);
-      printf(" \033[2J\033[H");
-    }
-    else{
-      printMatrix(n, S);
-    }
+  //print input state matrix
+  if(quiet != 1 && printAnim == 1){
+    printMatrixAnimation(n, S);
+    printf(" \033[2J\033[H");
+  }
+  else{
+    printMatrix(n, S);
   }
 
   clock_gettime(CLOCK_MONOTONIC, &e_input);
