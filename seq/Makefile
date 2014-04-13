@@ -16,7 +16,7 @@ test: all
 
 testBig: all
 	clear
-	toych testBig.out
+	touch testBig.out
 	rm testBig.out
 	./a.out 1000 3 1500 matrix.in testBig.out 0 0 1
 
