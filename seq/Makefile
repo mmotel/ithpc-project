@@ -1,10 +1,10 @@
 all: build
 
-comp: main.c lifegame.c matrixhelpers.c helpers.c
-	gcc -Wall -c main.c lifegame.c matrixhelpers.c helpers.c -lrt
+comp: main.c lifegame.c helpers.c
+	gcc -Wall -c main.c lifegame.c helpers.c -lrt
 
-build: comp main.o lifegame.o matrixhelpers.o helpers.o
-	gcc -Wall main.o lifegame.o matrixhelpers.o helpers.o -lrt
+build: comp main.o lifegame.o helpers.o
+	gcc -Wall main.o lifegame.o helpers.o -lrt
 
 testAnimation: all
 	clear

@@ -4,7 +4,6 @@
 #include <time.h>
 
 #include "helpers.h"
-#include "matrixhelpers.h"
 #include "lifegame.h"
 
 //use: a.out #size #steps inFile outFile (0|1)printAnimation (0|1)quiet
