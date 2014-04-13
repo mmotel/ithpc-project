@@ -7,13 +7,6 @@
 #include "matrixhelpers.h"
 #include "lifegame.h"
 
-double timeDiff(struct timespec *timeA_p, struct timespec *timeB_p)
-{
-  double diff = (((timeA_p->tv_sec * 1000000000) + timeA_p->tv_nsec) -
-    ((timeB_p->tv_sec * 1000000000) + timeB_p->tv_nsec));
-  return diff / 1000000000;
-}
-
 //use: a.out #size #steps inFile outFile (0|1)printAnimation (0|1)quiet
 int main(int argc, char **argv){
   if(argc < 8){

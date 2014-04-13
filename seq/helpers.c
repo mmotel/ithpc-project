@@ -18,3 +18,9 @@ void printTimes(double timeAll, double timeRead, double timeSteps, double timeWr
   printf("Steps: %.16f\n", timeSteps);
   printf("Write: %.16f\n", timeWrite);
 }
+
+double timeDiff(struct timespec *timeA_p, struct timespec *timeB_p){
+  double diff = (((timeA_p->tv_sec * 1000000000) + timeA_p->tv_nsec) -
+    ((timeB_p->tv_sec * 1000000000) + timeB_p->tv_nsec));
+  return diff / 1000000000;
+}
