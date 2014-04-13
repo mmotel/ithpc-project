@@ -16,6 +16,11 @@ int main(int argc, char **argv){
   struct timespec s_input, e_input, start, end;
   struct timespec s_steps, e_steps, s_output, e_output;
 
+  int i;
+  int **R;
+
+  double timeAll, timeInput, timeSteps, timeWrite;
+
   int n = atoi( argv[1] );
   int in = atoi( argv[2] );
   int steps = atoi( argv[3] );
@@ -24,7 +29,7 @@ int main(int argc, char **argv){
   int printAnim = atoi( argv[6] );
   int quiet = atoi( argv[7] );
 
-  int i;
+
   clock_gettime(CLOCK_MONOTONIC, &start);
   //allocating matrixes
   int **S = (int**) malloc( n * sizeof(int*));
@@ -40,7 +45,7 @@ int main(int argc, char **argv){
   }
   //---
 
-  int **R = S;
+  R = S;
 
   if(quiet != 1){
     if(printAnim == 1){
@@ -101,10 +106,10 @@ int main(int argc, char **argv){
 
   clock_gettime(CLOCK_MONOTONIC, &end);
 
-  double timeAll = timeDiff(&end, &start);
-  double timeInput = timeDiff(&e_input, &s_input);
-  double timeSteps = timeDiff(&e_steps, &s_steps);
-  double timeWrite = timeDiff(&e_output, &s_output);
+  timeAll = timeDiff(&end, &start);
+  timeInput = timeDiff(&e_input, &s_input);
+  timeSteps = timeDiff(&e_steps, &s_steps);
+  timeWrite = timeDiff(&e_output, &s_output);
 
   //print times
   if(quiet != 1){
