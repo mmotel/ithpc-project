@@ -62,7 +62,7 @@ int main(int argc, char **argv){
     printMatrixAnimation(n, S);
     printf(" \033[2J\033[H");
   }
-  else{
+  else if(quiet != 1){
     printMatrix(n, S);
   }
 
