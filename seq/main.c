@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <time.h>
 
+#include "helpers.h"
 #include "matrixhelpers.h"
 #include "lifegame.h"
 
@@ -13,10 +14,10 @@ double timeDiff(struct timespec *timeA_p, struct timespec *timeB_p)
   return diff / 1000000000;
 }
 
-//use: a.out #size #steps inFile outFile (0|1)printAnimation
+//use: a.out #size #steps inFile outFile (0|1)printAnimation (0|1)quiet
 int main(int argc, char **argv){
-  if(argc < 6){
-    printf("Użycie: a.out #size #inputSize #steps startMatrixFile resultMatrixFile (0|1)printAnimation\n");
+  if(argc < 8){
+    printf("Użycie: a.out #size #inputSize #steps startMatrixFile resultMatrixFile (0|1)printAnimation (0|1)quiet\n");
     return -1;
   }
 
@@ -28,7 +29,8 @@ int main(int argc, char **argv){
   int steps = atoi( argv[3] );
   char *inFile = argv[4];
   char *outFile = argv[5];
-  int printM = atoi( argv[6] );
+  int printAnim = atoi( argv[6] );
+  int quiet = atoi( argv[7] );
 
   int i;
   clock_gettime(CLOCK_MONOTONIC, &start);
@@ -48,21 +50,25 @@ int main(int argc, char **argv){
 
   int **R = S;
 
-  if(printM == 1){
-    printf(" \033[2J\033[H");
+  if(quiet != 1){
+    if(printAnim == 1){
+      printf(" \033[2J\033[H");
+    }
   }
-
   //read input state matrix from inFile  
   clock_gettime(CLOCK_MONOTONIC, &s_input);
 
   fscanMatrix(in, inFile, S);
   //print input state matrix
-  if(printM == 1){
-    printMatrixAnimation(n, S);
-    printf(" \033[2J\033[H");
-  }
-  else{
-    printMatrix(n, S);
+
+  if(quiet != 1){
+    if(printAnim == 1){
+      printMatrixAnimation(n, S);
+      printf(" \033[2J\033[H");
+    }
+    else{
+      printMatrix(n, S);
+    }
   }
 
   clock_gettime(CLOCK_MONOTONIC, &e_input);
@@ -71,7 +77,7 @@ int main(int argc, char **argv){
   //simulating steps
   clock_gettime(CLOCK_MONOTONIC, &s_steps);
 
-  simulateSteps(n, steps, S, T, R, printM);
+  simulateSteps(n, steps, S, T, R, printAnim);
 
   clock_gettime(CLOCK_MONOTONIC, &e_steps);
 
@@ -79,7 +85,7 @@ int main(int argc, char **argv){
   //print result state matrix
   clock_gettime(CLOCK_MONOTONIC, &s_output);
 
-  if(printM == 0){
+  if(quiet != 1 && printAnim == 0){
     printMatrix(n, R);
   }
   //print result state matrix into outFile
@@ -103,11 +109,16 @@ int main(int argc, char **argv){
 
   clock_gettime(CLOCK_MONOTONIC, &end);
 
+  double timeAll = timeDiff(&end, &start);
+  double timeInput = timeDiff(&e_input, &s_input);
+  double timeSteps = timeDiff(&e_steps, &s_steps);
+  double timeWrite = timeDiff(&e_output, &s_output);
+
   //print times
-  printf("Time : %.16f\n", timeDiff(&end, &start));
-  printf("Read : %.16f\n", timeDiff(&e_input, &s_input));
-  printf("Steps: %.16f\n", timeDiff(&e_steps, &s_steps));
-  printf("Write: %.16f\n", timeDiff(&e_output, &s_output));
+  if(quiet != 1){
+    printTimes(timeAll, timeInput, timeSteps, timeWrite);
+  }
+  fprintTimes(outFile, timeAll, timeInput, timeSteps, timeWrite);
 
   return 0;
 }
