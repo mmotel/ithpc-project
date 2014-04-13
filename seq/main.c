@@ -15,7 +15,7 @@ double timeDiff(struct timespec *timeA_p, struct timespec *timeB_p)
 
 //use: a.out #size #steps inFile outFile (0|1)printAnimation
 int main(int argc, char **argv){
-  if(argc < 4){
+  if(argc < 6){
     printf("Użycie: a.out #size #inputSize #steps startMatrixFile resultMatrixFile (0|1)printAnimation\n");
     return -1;
   }
