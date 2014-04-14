@@ -1,5 +1,13 @@
 all: build
 
+#LD_LIBRARY_PATH=./ ./a.out 1000 3 10000 matrix.in testBig2.out 0 0 1
+
+xeonc: main.c lifegame.c helpers.c
+	icc -mmic -Wall -c -fpic  main.c lifegame.c helpers.c -lrt -fopenmp -L/home/tadeusz/intel/composer_xe_2013_sp1.2.144/compiler/lib/mic
+
+xeonb: xeonc main.o lifegame.o helpers.o
+	icc -mmic -Wall main.o lifegame.o helpers.o -lrt -fopenmp -L/home/tadeusz/intel/composer_xe_2013_sp1.2.144/compiler/lib/mic
+
 comp: main.c lifegame.c helpers.c
 	gcc -Wall -fopenmp -c main.c lifegame.c helpers.c -lrt
 
@@ -14,7 +22,7 @@ test: all
 	clear
 	./a.out 10 3 10 matrix.in test.out 0 1 0
 
-testBig: all
+testBig:
 	clear
 	touch testBig.out
 	rm testBig.out
