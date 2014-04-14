@@ -91,6 +91,19 @@ int main(int argc, char **argv){
   clock_gettime(CLOCK_MONOTONIC, &e_output);
 
 
+  //free allocated memmory
+  for(i=0; i<n; i++){
+    free(S[i]);
+  }
+
+  free(S);
+
+  for(i=0; i<n; i++){
+    free(T[i]);
+  }  
+
+  free(T);
+
   clock_gettime(CLOCK_MONOTONIC, &end);
 
   timeAll = timeDiff(&end, &start);
