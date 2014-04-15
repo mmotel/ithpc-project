@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "offload.h"
+#include "/home/tadeusz/intel/include/cilk/cilk.h"
 
 #include "../lib/helpers.h"
 
@@ -22,7 +24,7 @@ int checkCell(int x, int y, int size, int **S){
 
 void makeMove(int n, int **S, int **T){
   int i,j;
-  #pragma offload target(mic:MIC_DEV) in(S:length(n+n)) out(T:length(n*n))
+  #pragma offload target(mic:0) in(S:length(n*n)) out(T:length(n*n))
   {
     #pragma omp parallel for private(i) private(j) shared(T) shared(S) 
     for(i = 0; i < n; i++){
