@@ -2,10 +2,10 @@ all: build
 
 #LD_LIBRARY_PATH=./ ./a.out 1000 3 10000 matrix.in testBig2.out 0 0 1
 
-xeoncol: main.c lifegame.c ../lib/helpers.c
+xeoncol: main.c lifegameoffload.c ../lib/helpers.c
 	icc -mmic -Wall -c -fpic  mainoffload.c lifegameoffload.c ../lib/helpers.c -lrt -fopenmp -L/home/tadeusz/intel/composer_xe_2013_sp1.2.144/compiler/lib/mic
 
-xeonbol: xeoncol main.o lifegame.o helpers.o
+xeonbol: xeoncol main.o lifegameoffload.o helpers.o
 	icc -mmic -Wall mainoffload.o lifegameoffload.o helpers.o -lrt -fopenmp -L/home/tadeusz/intel/composer_xe_2013_sp1.2.144/compiler/lib/mic
 
 xeonc: main.c lifegame.c ../lib/helpers.c
