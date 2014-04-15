@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <time.h>
 
-#include "helpers.h"
+#include "../lib/helpers.h"
 #include "lifegame.h"
 
 //use: a.out #size #steps inFile outFile (0|1)printAnimation (0|1)quiet

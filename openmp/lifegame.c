@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include "helpers.h"
+#include "../lib/helpers.h"
 
 int checkCell(int x, int y, int size, int **S){
   int i,j;

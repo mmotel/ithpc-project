@@ -1,7 +1,7 @@
 all: build
 
-comp: main.c lifegame.c helpers.c
-	gcc -Wall -c main.c lifegame.c helpers.c -lrt
+comp: main.c lifegame.c ../lib/helpers.c
+	gcc -Wall -c main.c lifegame.c ../lib/helpers.c -lrt
 
 build: comp main.o lifegame.o helpers.o
 	gcc -Wall main.o lifegame.o helpers.o -lrt
