@@ -29,4 +29,4 @@ testAnimation50: all
 	./a.out 50 3 100 ../matrix.in testAnimation50.out 1 0 0
 
 clear:
-	rm -rf *.out *.o
+	rm -rf *.out *.o *.out.times

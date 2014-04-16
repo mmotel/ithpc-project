@@ -55,7 +55,7 @@ int main(int argc, char **argv){
     printf(" \033[2J\033[H");
   }
 
-  printf("Read. ");
+  printf("Read. \n\n");
 
   //read input state matrix from inFile  
   clock_gettime(CLOCK_MONOTONIC, &s_input);
@@ -75,7 +75,7 @@ int main(int argc, char **argv){
 
   printf("Done. \n\n");
 
-  printf("Steps. ");
+  printf("Steps. \n\n");
 
   //simulating steps
   clock_gettime(CLOCK_MONOTONIC, &s_steps);
@@ -86,7 +86,7 @@ int main(int argc, char **argv){
 
   printf("Done. \n\n");
 
-  printf("Write. ");
+  printf("Write. \n\n");
 
   //print result state matrix
   clock_gettime(CLOCK_MONOTONIC, &s_output);

@@ -1,14 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 //helpers
 void fprintTimes(char *fname, double timeAll, double timeRead, double timeSteps, double timeWrite){
-  FILE *outputfile = fopen(fname, "a");
 
-  fprintf(outputfile, "Time : %.16f\n", timeAll);
-  fprintf(outputfile, "Read : %.16f\n", timeRead);
-  fprintf(outputfile, "Steps: %.16f\n", timeSteps);
-  fprintf(outputfile, "Write: %.16f\n", timeWrite);
+  int length = strlen(fname) + 6 + 1;
+  char fnewname[length];
+
+  strcpy(fnewname, fname);
+  strcat(fnewname, ".times");
+
+  FILE *outputfile = fopen(fnewname, "w");
+
+  fprintf(outputfile, "%.16f\n", timeAll); /*Time : */
+  fprintf(outputfile, "%.16f\n", timeRead); /*Read :  */
+  fprintf(outputfile, "%.16f\n", timeSteps); /*Steps:  */
+  fprintf(outputfile, "%.16f\n", timeWrite); /*Write:  */
 
   fclose(outputfile);
 }
@@ -51,7 +59,7 @@ void printMatrixAnimation(int n, int **M){
     }  
     printf("\n");
   }
-  printf("\n");
+  // printf("\n");
 }
 
 void fscanMatrix(int n, char *fname, int **M){
