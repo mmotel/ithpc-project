@@ -4,6 +4,11 @@
 // ./testReduce.out file.times #n
 int main(int argc, char **argv){
 
+  if(argc < 3){
+    printf("Użycie: ./testReduce.out file.times #n\n");
+    return -1;
+  }
+
   char *fname = argv[1];
   int n = atoi( argv[2] );
 
