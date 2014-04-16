@@ -11,7 +11,7 @@ void fprintTimes(char *fname, double timeAll, double timeRead, double timeSteps,
   strcpy(fnewname, fname);
   strcat(fnewname, ".times");
 
-  FILE *outputfile = fopen(fnewname, "w");
+  FILE *outputfile = fopen(fnewname, "a"); //a - for test only
 
   fprintf(outputfile, "%.16f\n", timeAll); /*Time : */
   fprintf(outputfile, "%.16f\n", timeRead); /*Read :  */
