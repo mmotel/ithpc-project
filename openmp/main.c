@@ -30,7 +30,7 @@ int main(int argc, char **argv){
   int printMat = atoi( argv[7] );
   int quiet = atoi( argv[8] );
 
-  printf("Malloc. ");
+  // printf("Malloc. ");
 
   clock_gettime(CLOCK_MONOTONIC, &start);
   //allocating matrixes
@@ -49,13 +49,13 @@ int main(int argc, char **argv){
 
   R = S;
 
-  printf("Done. \n\n");
+  // printf("Done. \n\n");
 
   if(quiet != 1 && printAnim == 1){
     printf(" \033[2J\033[H");
   }
 
-  printf("Read. \n\n");
+  // printf("Read. \n\n");
 
   //read input state matrix from inFile  
   clock_gettime(CLOCK_MONOTONIC, &s_input);
@@ -73,9 +73,9 @@ int main(int argc, char **argv){
 
   clock_gettime(CLOCK_MONOTONIC, &e_input);
 
-  printf("Done. \n\n");
+  // printf("Done. \n\n");
 
-  printf("Steps. \n\n");
+  // printf("Steps. \n\n");
 
   //simulating steps
   clock_gettime(CLOCK_MONOTONIC, &s_steps);
@@ -84,9 +84,9 @@ int main(int argc, char **argv){
 
   clock_gettime(CLOCK_MONOTONIC, &e_steps);
 
-  printf("Done. \n\n");
+  // printf("Done. \n\n");
 
-  printf("Write. \n\n");
+  // printf("Write. \n\n");
 
   //print result state matrix
   clock_gettime(CLOCK_MONOTONIC, &s_output);
@@ -100,7 +100,7 @@ int main(int argc, char **argv){
   }
   clock_gettime(CLOCK_MONOTONIC, &e_output);
 
-  printf("Done. \n\n");
+  // printf("Done. \n\n");
 
   //free allocated memmory
   for(i=0; i<n; i++){
