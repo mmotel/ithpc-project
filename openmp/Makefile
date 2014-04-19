@@ -40,5 +40,9 @@ testAnimation50: all
 	clear
 	./a.out 50 3 100 ../matrix.in testAnimation50.out 1 0 0
 
+tests: all a.out ../scripts/test.sh ../scripts/testReduce.out
+	../scripts/test.sh
+	
+
 clear:
 	rm -rf *.out *.o *.out.times

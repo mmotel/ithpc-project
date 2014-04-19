@@ -27,7 +27,7 @@ for i in {1..10..1}
 
 echo 'test 128 done. '
 
-../scrpits/testReduce.out testBig128.out.times 10 > test128.out
+../scripts/testReduce.out testBig128.out.times 10 > test128.out
 
 tail -n 4 test128.out
 
@@ -46,7 +46,7 @@ for i in {1..10..1}
 
 echo 'test 256 done'
 
-../scrpits/testReduce.out testBig256.out.times 10 > test256.out
+../scripts/testReduce.out testBig256.out.times 10 > test256.out
 
 tail -n 4 test256.out
 
@@ -65,7 +65,7 @@ for i in {1..10..1}
 
 echo 'test 512 done'
 
-../scrpits/testReduce.out testBig512.out.times 10 > test512.out
+../scripts/testReduce.out testBig512.out.times 10 > test512.out
 
 tail -n 4 test512.out
 
@@ -84,7 +84,7 @@ for i in {1..10..1}
 
 echo 'test 1024 done'
 
-../scrpits/testReduce.out testBig1024.out.times 10 > test1024.out
+../scripts/testReduce.out testBig1024.out.times 10 > test1024.out
 
 tail -n 4 test1024.out
 
